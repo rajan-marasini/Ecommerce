@@ -81,7 +81,12 @@ const CartPage = () => {
                                 <p className="text-slate-500">
                                     Taxes and shipping calculate at checkout
                                 </p>
-                                <Button label={"Checkout"} onClick={() => {}} />
+                                <Button
+                                    label={"Checkout"}
+                                    onClick={() => {
+                                        handleOrder();
+                                    }}
+                                />
                                 <Link
                                     to={"/"}
                                     className="text-slate-500 flex items-center gap-1 mt-4"

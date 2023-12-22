@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
 import { categoryRoute } from "./routes/categoryRoute.js";
+import { orderRoute } from "./routes/orderRoute.js";
 import { productRoute } from "./routes/productRoute.js";
 import { reviewRoute } from "./routes/reviewRoute.js";
 import { userRoute } from "./routes/userRoute.js";
@@ -27,11 +28,11 @@ app.get("/", (req, res) => {
 });
 
 //routes
-
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/review", reviewRoute);
+app.use("/api/v1/order", orderRoute);
 
 const PORT = process.env.PORT || 8000;
 

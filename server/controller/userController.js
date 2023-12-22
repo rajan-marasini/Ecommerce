@@ -83,6 +83,18 @@ export const userLogin = async (req, res) => {
     }
 };
 
+export const userProfile = async (req, res) => {
+    try {
+        const { user } = req;
+
+        res.status(200).send({
+            user,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const userUpdate = async (req, res) => {
     try {
         const { user } = req;

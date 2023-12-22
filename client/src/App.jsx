@@ -3,9 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import CartPage from "./pages/CartPage";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 import AdminAuth from "./pages/admin/AdminAuth";
 import AdminPage from "./pages/admin/AdminPage";
 import AddProducts from "./pages/admin/pages/AddProducts";
@@ -21,6 +23,8 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route element={<AdminAuth />}>
                     <Route path="/admin" element={<AdminPage />}>
                         <Route

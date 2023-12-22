@@ -12,7 +12,7 @@ const Button = ({ label, disabled, outline, small, custom, Icon, onClick }) => {
         ${small ? "py-1 px-2" : "py-3 px-4"}
         ${custom ? custom : ""}
         `}
-            onClick={onClick}
+            onClick={(e) => onClick(e)}
         >
             {Icon && <Icon size={24} />}
             {label}
