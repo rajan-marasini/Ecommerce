@@ -1,9 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import HomeBanner from "../components/Banner/HomeBanner";
 import ProductCard from "../components/Products/ProductCard";
-import { products } from "../utils/products";
 
 const Home = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const getAllProducts = async () => {
+            const { data } = await axios.get(
+                "/api/v1/product/get-all-products"
+            );
+            setProducts(data.products);
+        };
+
+        getAllProducts();
+    }, []);
+
     return (
         <div className="p-2 max-w-7xl mx-auto">
             <div>

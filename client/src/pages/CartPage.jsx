@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import ItemContent from "../components/CartComponents/ItemContent";
 import CartContext from "../context/CartContext";
+import UserContext from "../context/UserContext";
 import { formatPrice } from "../utils/formatPrice";
 
 const CartPage = () => {
     const { cartList, setCartList } = useContext(CartContext);
+    const { user } = useContext(UserContext);
 
     const products = cartList.map((product) => product?.id);
 
@@ -24,8 +26,14 @@ const CartPage = () => {
         return total;
     };
 
-    const handleOrder = async (e) => {
+    const handleCheckout = async (e) => {
         try {
+            if (!user?.name) {
+                toast.error("You need to login to checkout");
+                console.log(products);
+                return;
+            }
+
             const { data } = await axios.post(`/api/v1/user/order/create`, {
                 amount: totalSum(),
                 products,
@@ -53,7 +61,7 @@ const CartPage = () => {
                     </div>
                     <div>
                         {cartList &&
-                            cartList.map((item) => (
+                            cartList?.map((item) => (
                                 <ItemContent key={item.id} item={item} />
                             ))}
                     </div>
@@ -82,7 +90,7 @@ const CartPage = () => {
                                 <Button
                                     label={"Checkout"}
                                     onClick={(e) => {
-                                        handleOrder(e);
+                                        handleCheckout(e);
                                     }}
                                 />
                                 <Link

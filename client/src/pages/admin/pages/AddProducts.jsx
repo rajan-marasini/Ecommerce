@@ -47,6 +47,7 @@ const AddProducts = () => {
     const handleImageUpload = async (e, color) => {
         setIsLoading(true);
         try {
+            toast.success("Uploading...");
             const image = e.target.files[0];
             const storage = getStorage(app);
             const fileName = new Date().getTime() + image.name;
@@ -60,7 +61,6 @@ const AddProducts = () => {
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                 );
                 console.log("the total upload progress is ", progress);
-                toast.success("Image uploaded successfully");
 
                 if (snapshot.error) {
                     console.error(snapshot.error.message);
@@ -80,6 +80,7 @@ const AddProducts = () => {
                     img.color === color ? { ...img, image: imageUrl } : img
                 )
             );
+            toast.success("Image uploaded successfully");
         } catch (error) {
             console.error(error.message);
             toast.error("Image upload failed. Try again");

@@ -9,7 +9,7 @@ const ItemContent = ({ item }) => {
 
     const handleQtyDecrease = () => {
         const updatedCartList = cartList.map((product) => {
-            if (product.id === item.id) {
+            if (product.id === item?.id) {
                 const updatedProduct = {
                     ...product,
                     quantity: Math.max(product.quantity - 1, 1),
@@ -26,7 +26,7 @@ const ItemContent = ({ item }) => {
 
     const handleQtyIncrease = () => {
         const updatedCartList = cartList.map((product) => {
-            if (product.id === item.id) {
+            if (product.id === item?.id) {
                 const updatedProduct = {
                     ...product,
                     quantity: product.quantity + 1,
@@ -53,10 +53,10 @@ const ItemContent = ({ item }) => {
     return (
         <div className="grid grid-cols-5 text-xs md:text-sm gap-4 border-2 border-slate-200 py-4 items-center px-2">
             <div className="col-span-2 justify-self-start flex gap-2 md:gap-4">
-                <Link to={`/product/${item.id}`}>
+                <Link to={`/product/${item?.id}`}>
                     <div className="relative w-[70px] aspect-square">
                         <img
-                            src={item.selectedImage.image}
+                            src={item?.selectedImage?.image}
                             alt={item?.name}
                             className="object-contain"
                         />
@@ -65,10 +65,10 @@ const ItemContent = ({ item }) => {
                 <div className="flex flex-col justify-between">
                     <Link to={`/product/${item.id}`}>
                         {item?.name?.length < 25
-                            ? item.name
-                            : item.name.substring(0, 25)}
+                            ? item?.name
+                            : item?.name?.substring(0, 25)}
                     </Link>
-                    <div>{item?.selectedImage.color}</div>
+                    <div>{item?.selectedImage?.color}</div>
                     <div className="w-[70px]">
                         <button
                             className=" text-slate-500 underline"

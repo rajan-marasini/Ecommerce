@@ -5,7 +5,7 @@ const SetColor = ({ images, cartProduct, handleColorSelect }) => {
         <div className="flex gap-3 items-center">
             <span className="font-bold">COLOR:</span>
             <div className="flex gap-2">
-                {images.map((image) => (
+                {images?.map((image) => (
                     <div
                         key={image.color}
                         onClick={() => handleColorSelect(image)}

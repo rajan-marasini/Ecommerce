@@ -4,9 +4,9 @@ const ProductImage = ({ cartProduct, product, handleColorsSelect }) => {
     return (
         <div className="grid grid-cols-6 gap-2 h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
             <div className="flex flex-col items-center justify-center gap-4 cursor-pointer border-2 h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
-                {product?.images.map((image) => (
+                {product?.images?.map((image) => (
                     <div
-                        key={image.color}
+                        key={image?.color}
                         onClick={() => handleColorsSelect(image)}
                         className={`relative w-4/5 aspect-square rounded border-teal-300
                         ${

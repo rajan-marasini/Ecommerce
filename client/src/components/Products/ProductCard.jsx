@@ -7,8 +7,8 @@ const ProductCard = ({ product }) => {
     const navigate = useNavigate();
 
     const productRating =
-        product?.reviews.reduce((acc, item) => item.rating + acc, 0) /
-        product?.reviews.length;
+        product?.reviews?.reduce((acc, item) => item.rating + acc, 0) /
+        product?.reviews?.length;
 
     return (
         <div
@@ -32,10 +32,10 @@ const ProductCard = ({ product }) => {
                     <Rating value={productRating} readOnly />
                 </div>
                 <div>
-                    {product?.reviews.length > 0
-                        ? product?.reviews.length > 1
-                            ? product?.reviews.length + " reviews"
-                            : product?.reviews.length + " review"
+                    {product?.reviews?.length > 0
+                        ? product?.reviews?.length > 1
+                            ? product?.reviews?.length + " reviews"
+                            : product?.reviews?.length + " review"
                         : ""}
                 </div>
                 <div>{formatPrice(product?.price)}</div>

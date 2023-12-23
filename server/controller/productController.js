@@ -2,6 +2,8 @@ import { prisma } from "../config/prismaConfig.js";
 
 export const createProduct = async (req, res) => {
     try {
+        const { user } = req;
+
         const { name, price, brand, description, inStock, category, images } =
             req.body;
 
@@ -16,6 +18,11 @@ export const createProduct = async (req, res) => {
                 category: {
                     connect: {
                         category: category,
+                    },
+                },
+                user: {
+                    connect: {
+                        id: user.id,
                     },
                 },
             },
@@ -58,6 +65,22 @@ export const getAllProducts = async (req, res) => {
             success: false,
             message: "Something  went wrong",
             error: error.message,
+        });
+    }
+};
+
+export const getAProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const product = await prisma.product.findUnique({ where: { id } });
+
+        res.status(200).send({ product });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({
+            success: false,
+            message: error.message,
         });
     }
 };

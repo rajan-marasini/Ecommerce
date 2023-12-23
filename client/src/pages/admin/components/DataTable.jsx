@@ -125,16 +125,12 @@ export default function DataTable() {
     const handleDelete = async (id) => {
         try {
             setDialogBoxOpen(false);
+            toast.success("Product deleted successfully");
 
             const { data } = await axios.delete(
                 `/api/v1/product/delete/${deleteId}`
             );
-            if (data.success) {
-                toast.success("Product deleted successfully");
-                setProducts((prev) =>
-                    prev.filter((product) => product.id != id)
-                );
-            }
+            setProducts((prev) => prev.filter((product) => product.id != id));
         } catch (error) {
             console.log(error.message);
             toast.error("Deletion failed");
