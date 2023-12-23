@@ -124,6 +124,8 @@ export default function DataTable() {
 
     const handleDelete = async (id) => {
         try {
+            setDialogBoxOpen(false);
+
             const { data } = await axios.delete(
                 `/api/v1/product/delete/${deleteId}`
             );
@@ -132,7 +134,6 @@ export default function DataTable() {
                 setProducts((prev) =>
                     prev.filter((product) => product.id != id)
                 );
-                setDialogBoxOpen(false);
             }
         } catch (error) {
             console.log(error.message);

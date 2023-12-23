@@ -26,8 +26,6 @@ const CartPage = () => {
 
     const handleOrder = async (e) => {
         try {
-            e.preventDefault();
-
             const { data } = await axios.post(`/api/v1/user/order/create`, {
                 amount: totalSum(),
                 products,
@@ -83,8 +81,8 @@ const CartPage = () => {
                                 </p>
                                 <Button
                                     label={"Checkout"}
-                                    onClick={() => {
-                                        handleOrder();
+                                    onClick={(e) => {
+                                        handleOrder(e);
                                     }}
                                 />
                                 <Link

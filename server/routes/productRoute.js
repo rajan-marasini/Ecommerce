@@ -5,12 +5,13 @@ import {
     getAllProducts,
     updateStock,
 } from "../controller/productController.js";
+import { isAdmin, isSignedIn } from "../middleware/userMiddleware.js";
 
 const router = express.Router();
 
-router.post("/create", createProduct);
+router.post("/create", isSignedIn, isAdmin, createProduct);
 router.get("/get-all-products", getAllProducts);
-router.put("/updateStock/:id", updateStock);
-router.delete("/delete/:id", deleteProduct);
+router.put("/updateStock/:id", isSignedIn, isAdmin, updateStock);
+router.delete("/delete/:id", isSignedIn, isAdmin, deleteProduct);
 
 export { router as productRoute };

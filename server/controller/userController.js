@@ -124,3 +124,22 @@ export const userUpdate = async (req, res) => {
         });
     }
 };
+
+export const userLogout = async (req, res) => {
+    try {
+        const { user } = req;
+
+        res.status(200).cookie("token", "").send({
+            success: true,
+            message: "Logout successfully",
+            user: {},
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).send({
+            success: false,
+            message: "Something went wrong",
+            error: error.message,
+        });
+    }
+};

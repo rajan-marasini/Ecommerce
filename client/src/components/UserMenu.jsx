@@ -7,15 +7,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
+import axios from "axios";
 import * as React from "react";
+import toast from "react-hot-toast";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import Avatar from "./Avatar";
 
 export default function UserMenu() {
-    const { user } = React.useContext(UserContext);
+    const { user, setUser } = React.useContext(UserContext);
+    const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -24,6 +27,22 @@ export default function UserMenu() {
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("ok logout");
+            toast.success("Logout successfully");
+            navigate("/");
+
+            const { data } = await axios.delete("/api/v1/user/logout");
+
+            setUser(data.user);
+        } catch (error) {
+            console.log(error.message);
+            toast.error("Something went wrong");
+        }
     };
 
     return (
@@ -107,23 +126,29 @@ export default function UserMenu() {
                 <Divider />
 
                 <MenuItem onClick={handleClose}>
-                    <Link to={"/login"} className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                         {user?.name ? (
-                            <>
+                            <button
+                                onClick={(e) => handleLogout(e)}
+                                className="flex items-center gap-2"
+                            >
                                 <ListItemIcon>
                                     <Logout fontSize="medium" />
                                 </ListItemIcon>
                                 Logout
-                            </>
+                            </button>
                         ) : (
-                            <>
+                            <Link
+                                to={"login"}
+                                className="flex items-center gap-2"
+                            >
                                 <ListItemIcon>
                                     <Login fontSize="medium" />
                                 </ListItemIcon>
                                 Login
-                            </>
+                            </Link>
                         )}
-                    </Link>
+                    </div>
                 </MenuItem>
             </Menu>
         </React.Fragment>

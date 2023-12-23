@@ -1,12 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import UserContext from "../context/UserContext";
 
 const Register = () => {
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
@@ -36,6 +38,10 @@ const Register = () => {
             setIsLoading(false);
         }
     };
+
+    if (user?.name) {
+        return <Navigate to={"/"} />;
+    }
 
     return (
         <div className="max-w-lg mx-auto w-full mt-16 h-full">

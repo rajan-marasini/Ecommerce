@@ -8,7 +8,7 @@ import UserContext from "../context/UserContext";
 
 const Login = () => {
     const navigate = useNavigate();
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
@@ -24,6 +24,7 @@ const Login = () => {
             });
             if (data.success) {
                 toast.success(data.message);
+                setUser(data.user);
                 navigate("/");
             } else {
                 toast.error(data.message);
