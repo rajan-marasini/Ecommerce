@@ -34,10 +34,16 @@ const CartPage = () => {
                 return;
             }
 
-            const { data } = await axios.post(`/api/v1/user/order/create`, {
+            const { data } = await axios.post(`/api/v1/order/create`, {
                 amount: totalSum(),
-                products,
+                products: cartList,
             });
+
+            if (data.success) {
+                toast.success("Your order has been placed Successfully");
+                localStorage.clear("cartListItems");
+                setCartList([]);
+            }
         } catch (error) {
             console.log(error.message);
             toast.error("Something went wrong, Try again later");

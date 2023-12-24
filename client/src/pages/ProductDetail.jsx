@@ -34,7 +34,7 @@ const ProductDetail = () => {
                     id: data.product?.id,
                     name: data.product?.name,
                     description: data.product?.description,
-                    category: data.product?.category,
+                    category: data.product?.categoryName,
                     brand: data.product?.brand,
                     selectedImage:
                         data.product?.images?.length > 0
@@ -102,7 +102,7 @@ const ProductDetail = () => {
 
     return isLoading ? (
         <>
-            <div>Loading</div>
+            <div>Loading...</div>
         </>
     ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20 max-w-7xl mx-auto">
@@ -131,13 +131,12 @@ const ProductDetail = () => {
 
                 <div>
                     <span className="font-bold">CATEGORY: </span>
-                    {product?.category}
+                    {product?.categoryName}
                 </div>
                 <div>
                     <span className="font-bold">BRAND: </span>
                     {product?.brand}
                 </div>
-                {console.log("cart product is", cartProduct)}
                 <div
                     className={
                         product?.inStock ? "text-teal-400" : "text-rose-500"

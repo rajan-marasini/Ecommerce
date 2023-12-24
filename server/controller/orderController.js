@@ -7,13 +7,15 @@ export const createOrder = async (req, res) => {
         const { amount, products } = req.body;
 
         const order = await prisma.order.create({
-            amount,
-            products,
-            status: "Ok",
-            deliveryStatus: "Pending",
-            user: {
-                connect: {
-                    id: user.id,
+            data: {
+                amount: parseFloat(amount),
+                products,
+                status: "Ok",
+                deliveryStatus: "Pending",
+                user: {
+                    connect: {
+                        id: user.id,
+                    },
                 },
             },
         });
@@ -30,5 +32,20 @@ export const createOrder = async (req, res) => {
             message: "Something went wrong",
             error: error.message,
         });
+    }
+};
+
+export const getAllOrders = async (req, res) => {
+    try {
+        const orders = await prisma.order.findMany({
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+
+        res.send({ orders });
+    } catch (error) {
+        console.log(error.message);
+        res.send({ message: error.message });
     }
 };
