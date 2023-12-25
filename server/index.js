@@ -16,7 +16,12 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: [
+            "http://localhost:5173",
+            "https://ecommerce-client-indol.vercel.app",
+            "https://ecommerce-client-razan-marasinis-projects.vercel.app",
+            "https://ecommerce-client-git-main-razan-marasinis-projects.vercel.app",
+        ],
         credentials: true,
     })
 );
