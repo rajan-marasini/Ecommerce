@@ -1,10 +1,10 @@
 import React from "react";
-import DataTable from "../components/DataTable";
+import DataTableAllProducts from "../components/DataTableAllProducts";
 
 const ManageProducts = () => {
     return (
         <div className="w-full mx-auto max-w-7xl p-4">
-            <DataTable />
+            <DataTableAllProducts />
         </div>
     );
 };

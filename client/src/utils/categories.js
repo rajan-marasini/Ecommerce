@@ -12,7 +12,7 @@ export const categories = [
         icon: AiFillPhone,
     },
     {
-        label: "Laptop",
+        label: "Laptops",
         icon: FaLaptop,
     },
     {

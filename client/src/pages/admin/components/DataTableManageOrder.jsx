@@ -2,69 +2,28 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import * as React from "react";
 import { toast } from "react-hot-toast";
-import {
-    MdCached,
-    MdClose,
-    MdDelete,
-    MdDone,
-    MdRemoveRedEye,
-} from "react-icons/md";
+import { MdCached, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import AlertDialog from "../../../components/Dialog";
 import { formatPrice } from "../../../utils/formatPrice";
 import ActionBtn from "./ActionBtn";
-import Status from "./Status";
 
 export default function DataTable() {
-    const [products, setProducts] = React.useState([]);
+    const [orders, setOrders] = React.useState([]);
     const navigate = useNavigate();
     const [dialogBoxOpen, setDialogBoxOpen] = React.useState(false);
     const [deleteId, setDeleteId] = React.useState("");
 
     const columns = [
         { field: "id", headerName: "ID", width: 200 },
-        { field: "name", headerName: "Product Name", width: 160 },
+        { field: "name", headerName: "Customer Name", width: 160 },
         {
             field: "price",
             headerName: "Price(USD)",
             width: 130,
             renderCell: (params) => (
                 <div className="font-bold text-center text-slate-800">
-                    {params.row.price}
-                </div>
-            ),
-        },
-        {
-            field: "category",
-            headerName: "Category",
-            width: 90,
-        },
-        {
-            field: "brand",
-            headerName: "Brand",
-            width: 100,
-        },
-        {
-            field: "inStock",
-            headerName: "In Stock",
-            width: 160,
-            renderCell: (params) => (
-                <div>
-                    {params.row.inStock ? (
-                        <Status
-                            text={"In stock"}
-                            Icon={MdDone}
-                            bg={"bg-teal-200"}
-                            color={"text-teal-700"}
-                        />
-                    ) : (
-                        <Status
-                            text={"Out of stock"}
-                            Icon={MdClose}
-                            bg={"bg-rose-200"}
-                            color={"text-rose-700"}
-                        />
-                    )}
+                    {params.row.amount}
                 </div>
             ),
         },
@@ -76,9 +35,7 @@ export default function DataTable() {
                 <div className="flex justify-between gap-4">
                     <ActionBtn
                         Icon={MdCached}
-                        onClick={() =>
-                            handleToggleStock(params.row.id, params.row.inStock)
-                        }
+                        onClick={() => handleToggleStock(params.row.id)}
                     />
                     <ActionBtn
                         Icon={MdDelete}
@@ -97,7 +54,7 @@ export default function DataTable() {
     ];
     let rows = [];
 
-    const handleToggleStock = async (id, inStock) => {
+    const handleToggleStock = async (id) => {
         try {
             const { data } = await axios.put(
                 `/api/v1/product/updateStock/${id}`,
@@ -108,7 +65,7 @@ export default function DataTable() {
 
             if (data.success) {
                 toast.success("Status updated successfully");
-                setProducts((prev) =>
+                setOrders((prev) =>
                     prev.map((product) =>
                         product.id === id
                             ? { ...product, inStock: !inStock }
@@ -130,7 +87,7 @@ export default function DataTable() {
             const { data } = await axios.delete(
                 `/api/v1/product/delete/${deleteId}`
             );
-            setProducts((prev) => prev.filter((product) => product.id != id));
+            setOrders((prev) => prev.filter((product) => product.id != id));
         } catch (error) {
             console.log(error.message);
             toast.error("Deletion failed");
@@ -138,32 +95,28 @@ export default function DataTable() {
     };
 
     React.useEffect(() => {
-        const getAllProducts = async () => {
-            const { data } = await axios.get(
-                "/api/v1/product/get-all-products"
-            );
+        const getAllOrders = async () => {
+            const { data } = await axios.get("/api/v1/order/all-orders");
 
-            setProducts(data.products);
+            setOrders(data.orders);
         };
 
-        getAllProducts();
+        getAllOrders();
     }, []);
 
-    rows = products?.map((product) => ({
-        id: product.id,
-        name: product.name,
-        price: formatPrice(product.price),
-        category: product.category.category,
-        brand: product.brand,
-        inStock: product.inStock,
-        images: product.images,
+    console.log(orders);
+
+    rows = orders?.map((order) => ({
+        id: order.id,
+        name: order.user.name,
+        price: formatPrice(order.amount),
     }));
 
     return (
         <div className="max-w-6xl mx-auto">
             <div className="mb-4 mt-8">
                 <h1 className="font-bold text-3xl text-center">
-                    Manage Produts
+                    Manage Orders
                 </h1>
             </div>
             <div style={{ height: 500, width: "100%" }}>

@@ -92,6 +92,7 @@ const AddProducts = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
+            setIsLoading(true);
 
             const { data } = await axios.post("/api/v1/product/create", {
                 name,
@@ -109,6 +110,8 @@ const AddProducts = () => {
             }
         } catch (error) {
             console.log(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 

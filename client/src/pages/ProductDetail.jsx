@@ -105,7 +105,7 @@ const ProductDetail = () => {
             <div>Loading...</div>
         </>
     ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-8 mt-20 max-w-7xl mx-auto px-6">
             <ProductImage
                 cartProduct={cartProduct}
                 product={product}

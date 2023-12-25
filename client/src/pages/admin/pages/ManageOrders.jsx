@@ -1,7 +1,12 @@
 import React from "react";
+import DataTable from "../components/DataTableManageOrder";
 
 const ManageOrders = () => {
-    return <div>ManageOrders</div>;
+    return (
+        <div>
+            <DataTable />
+        </div>
+    );
 };
 
 export default ManageOrders;

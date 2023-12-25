@@ -41,6 +41,9 @@ export const getAllOrders = async (req, res) => {
             orderBy: {
                 createdAt: "desc",
             },
+            include: {
+                user: true,
+            },
         });
 
         res.send({ orders });
