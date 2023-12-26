@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CartContext from "../../context/CartContext";
+import SearchContext from "../../context/SearchContext";
 import UserMenu from "../UserMenu";
 
 const Header = () => {
     const naviagate = useNavigate();
     const { cartList } = useContext(CartContext);
+    const { search, setSearch } = useContext(SearchContext);
 
     return (
         <div className="sticky top-0 w-full z-30 shadow-sm max-w-7xl mx-auto">
@@ -16,7 +18,18 @@ const Header = () => {
                     E-shop
                 </Link>
 
-                <div>Search</div>
+                <div className="flex-grow flex justify-center items-center">
+                    <div className="w-full max-w-[24rem] px-4 py-2 rounded-lg  flex justify-center items-center bg-white">
+                        <input
+                            type="text"
+                            className="w-full border-none outline-none bg-transparent"
+                            placeholder="Search for a product "
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <FaSearch size={24} />
+                    </div>
+                </div>
 
                 <div className="flex items-center gap-8 md:gap-12">
                     <div

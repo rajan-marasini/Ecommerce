@@ -63,7 +63,7 @@ export default function UserMenu() {
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
                     >
-                        <Avatar />
+                        <Avatar src={user?.image} />
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -104,12 +104,20 @@ export default function UserMenu() {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
                 <MenuItem onClick={handleClose}>
-                    <Link to={"/profile"} className="flex gap-3 items-center">
-                        <Avatar /> Profile
-                    </Link>
+                    <button className="w-full" onClick={() => {}}>
+                        <Link
+                            to={"/profile"}
+                            className="flex gap-3 items-center w-full"
+                        >
+                            <Avatar src={user?.image} /> Profile
+                        </Link>
+                    </button>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                    <Link to={"/cart"} className="flex items-center gap-3">
+                    <Link
+                        to={"/cart"}
+                        className="flex items-center gap-3 w-full"
+                    >
                         <FaCartPlus size={18} /> My Cart
                     </Link>
                 </MenuItem>
@@ -126,7 +134,7 @@ export default function UserMenu() {
                 <Divider />
 
                 <MenuItem onClick={handleClose}>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 w-full">
                         {user?.name ? (
                             <button
                                 onClick={(e) => handleLogout(e)}
@@ -140,7 +148,7 @@ export default function UserMenu() {
                         ) : (
                             <Link
                                 to={"login"}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 w-full"
                             >
                                 <ListItemIcon>
                                     <Login fontSize="medium" />

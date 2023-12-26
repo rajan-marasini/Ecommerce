@@ -60,7 +60,6 @@ const AddProducts = () => {
                 const progress = Math.round(
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                 );
-                console.log("the total upload progress is ", progress);
 
                 if (snapshot.error) {
                     console.error(snapshot.error.message);

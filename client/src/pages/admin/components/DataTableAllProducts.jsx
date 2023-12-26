@@ -165,7 +165,7 @@ export default function DataTable() {
         <div className="max-w-6xl mx-auto">
             <div className="mb-4 mt-8">
                 <h1 className="font-bold text-3xl text-center">
-                    Manage Produts
+                    Manage Products
                 </h1>
             </div>
             <div style={{ height: 500, width: "100%" }}>
