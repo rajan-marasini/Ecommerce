@@ -16,6 +16,7 @@ import ManageOrders from "./pages/admin/pages/ManageOrders";
 import ManageProducts from "./pages/admin/pages/ManageProducts";
 
 const App = () => {
+    //this is app
     return (
         <Routes>
             <Route element={<Layout />}>
